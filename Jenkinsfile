@@ -1,11 +1,11 @@
 pipeline {
     agent any
     
-     script {
+    script {
      // Define a variable for the version
     def version = '1'
      }
-     
+
     stages {
         stage('Build') {
             steps {
