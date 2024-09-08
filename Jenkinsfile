@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'DOCKER_HUB_TOKEN', variable: 'DOCKER_HUB_TOKEN')]) {
                     // Log in to Docker Hub using a token
-                    sh "docker login -u rajeshtalla0209 -p ${DOCKER_HUB_TOKEN} https://registry.hub.docker.com"
+                    sh "echo ${DOCKER_HUB_TOKEN} | docker login -u rajeshtalla0209 --password-stdin https://registry.hub.docker.com"
 
                     // Tag the image with your Docker Hub username and repository name
                     sh "docker tag rajeshtalla0209/votingapp-vote:${VERSION} rajeshtalla0209/votingapp-vote:${VERSION}"
