@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     environment {
         VERSION = '1'
     }
@@ -12,25 +12,25 @@ pipeline {
                 git 'https://github.com/RKDevops1234/votingapp-vote.git'
 
                 // Build the Docker image
-                sh 'docker build -t rajeshtalla0209/votingapp-vote:${version}  .'
+                sh "docker build -t rajeshtalla0209/votingapp-vote:${VERSION} ."
             }
         }
 
         stage('Run') {
             steps {
                 // Run the Docker container and expose port 80
-                sh 'docker run -p 80:80 -it rajeshtalla0209/votingapp-vote:${version}'
+                sh "docker run -p 80:80 -it rajeshtalla0209/votingapp-vote:${VERSION}"
             }
         }
-    }
+
         stage('Push to Docker Hub') {
             steps {
-                
                 // Tag the image with your Docker Hub username and repository name
-                sh 'docker tag your-image-name rajeshtalla0209/votingapp-vote:${version}'
-                docker.withRegistry( 'https://registry.hub.docker.com', 'docker' ) {
-                // Push the image to Docker Hub
-                sh 'docker push rajeshtalla0209/votingapp-vote:${version}'
+                sh "docker tag rajeshtalla0209/votingapp-vote:${VERSION} rajeshtalla0209/votingapp-vote:${VERSION}"
+                docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                    // Push the image to Docker Hub
+                    sh "docker push rajeshtalla0209/votingapp-vote:${VERSION}"
+                }
             }
         }
     }
