@@ -32,7 +32,7 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                script {
+                withCredentials([string(credentialsId: 'DOCKER_HUB_TOKEN', variable: 'DOCKER_HUB_TOKEN')]) {
                     // Log in to Docker Hub using a token
                     sh "docker login -u rajeshtalla0209 -p ${DOCKER_HUB_TOKEN} https://registry.hub.docker.com"
 
