@@ -22,13 +22,15 @@ pipeline {
             }
         }
     }
-}
         stage('Push to Docker Hub') {
             steps {
+                
                 // Tag the image with your Docker Hub username and repository name
                 sh 'docker tag your-image-name rajeshtalla0209/votingapp-vote:${version}'
-
+                docker.withRegistry( 'https://registry.hub.docker.com', 'docker' ) {
                 // Push the image to Docker Hub
                 sh 'docker push rajeshtalla0209/votingapp-vote:${version}'
             }
         }
+    }
+}
