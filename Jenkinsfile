@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Tag the image with your Docker Hub username and repository name
                 sh "docker tag rajeshtalla0209/votingapp-vote:${VERSION} rajeshtalla0209/votingapp-vote:${VERSION}"
-                docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_cred') {
                     // Push the image to Docker Hub
                     sh "docker push rajeshtalla0209/votingapp-vote:${VERSION}"
                 }
